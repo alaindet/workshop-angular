@@ -1,0 +1,63 @@
+<h1 class="mb-4">Teams</h1>
+
+<div *ngIf="isAdmin()" class="card mb-4 bg-light">
+  <div class="card-body">
+  <h2>Create a new team</h2>
+    <div class="container-fluid gx-0">
+      <form
+        class="row g-3 align-items-end"
+        [formGroup]="teamForm"
+        (ngSubmit)="onCreateTeam()"
+      >
+
+        <!-- ID -->
+        <div class="col-3">
+          <label for="teamid">ID</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="id"
+            id="teamid"
+            placeholder="Team ID..."
+          >
+        </div>
+
+        <!-- Name -->
+        <div class="col-3">
+          <label for="teamname">Name</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="name"
+            id="teamname"
+            placeholder="Team Name..."
+          >
+        </div>
+
+        <!-- Submit -->
+        <div class="col-3">
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="teamForm.invalid"
+          >
+            Create team
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<ng-container *ngIf="loaded(); else loadingRef">
+  <ul class="list-group">
+    <li *ngFor="let team of teams() ?? []" class="list-group-item">
+      <a [routerLink]="['/teams', team.id]">{{ team.name }}</a>
+    </li>
+  </ul>
+</ng-container>
+
+<!-- Template: loading -->
+<ng-template #loadingRef>
+  Loading...
+</ng-template>

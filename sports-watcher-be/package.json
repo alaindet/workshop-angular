@@ -1,0 +1,28 @@
+{
+  "name": "sports-watcher-be",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app/server.js",
+  "scripts": {
+    "start": "nodemon ./app/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "generate:matches": "node ./scripts/matches-generator.js",
+    "generate:secret": "node ./scripts/secret-generator.js"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "typescript"
+  ],
+  "author": "Alain D'Ettorre <alain.det@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}

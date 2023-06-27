@@ -1,0 +1,12 @@
+<!-- Spinner -->
+<app-linear-spinner *ngIf="loading" />
+
+<!-- Notification -->
+<div *ngIf="notification() as notif" class="alert-container">
+  <div [ngClass]="['alert alert-dismissible', notificationCssClass()]">
+    {{ notif.message }}
+    <button type="button" class="btn-close" (click)="onDismissAlert()"></button>
+  </div>
+</div>
+
+<router-outlet />
