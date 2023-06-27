@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { EMPTY, catchError, map, of, switchMap, tap } from 'rxjs';
+import { EMPTY, catchError, map, of, switchMap, take, tap } from 'rxjs';
 import { Router } from '@angular/router';
 
 import { createUiController } from '@app/core/store/ui';
@@ -27,11 +27,8 @@ export class UserEffects {
   signIn$ = createEffect(() => this.actions.pipe(
     ofType(signInActions.signIn),
     switchMap(({ credentials }) => this.userService.signIn(credentials).pipe(
+      take(1),
       map(({ data: user, message }) => {
-
-        // TODO: Remove
-        console.log('Trying to sign in...');
-
         return signInActions.signInSuccess({ user, message });
       }),
       catchError(err => {

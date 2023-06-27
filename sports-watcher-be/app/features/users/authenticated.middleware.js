@@ -18,7 +18,8 @@ function authenticated(req, res, next) {
     });
   }
 
-  jwt.verify(token, process.env.SPORTS_WATCHER_SECRET, (err, payload) => {
+  const appSecret = process.env.SPORTS_WATCHER_JWT_SECRET ?? 'the-secret';
+  jwt.verify(token, appSecret, (err, payload) => {
 
     if (err) {
       console.error(err);

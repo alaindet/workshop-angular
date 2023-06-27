@@ -39,19 +39,16 @@ export class SignInPageComponent implements OnInit {
     const email = this.loginForm.value.email!;
     const password = this.loginForm.value.password!;
     const credentials = { email, password };
-    console.log('onSubmit'); // TODO: Remove
     this.store.dispatch(signInActions.signIn({ credentials }));
   }
 
   onSignInAsBasic() {
     const credentials = { email: 'basic@example.com', password: 'basic@example.com' };
-    console.log('onSignInAsBasic'); // TODO: Remove
     this.store.dispatch(signInActions.signIn({ credentials }));
   }
 
   onSignInAsAdmin() {
     const credentials = { email: 'admin@example.com', password: 'admin@example.com' };
-    console.log('onSignInAsAdmin'); // TODO: Remove
     this.store.dispatch(signInActions.signIn({ credentials }));
   }
 

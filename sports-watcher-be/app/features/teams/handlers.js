@@ -1,11 +1,10 @@
-const { readJsonData, writeJsonData } = require('../../common/utils/json-data');
+const teamsService = require('./service');
 
 function getTeams(req, res) {
-  const teams = readJsonData('teams');
-  res.send({
-    message: 'All teams',
-    data: teams,
-  });
+  const teams = teamsService.getAllTeams();
+  const data = teams;
+  const message = 'All teams';
+  res.send({ data, message });
 }
 
 function createTeam(req, res) {
@@ -14,54 +13,41 @@ function createTeam(req, res) {
   const inputName = req.body.name;
 
   if (!inputId) {
-    return res.status(400).send({
-      message: 'Missing/invalid ID',
-    });
+    const message = 'Missing/invalid ID';
+    return res.status(400).send({ message });
   }
 
   if (!inputName) {
-    return res.status(400).send({
-      error: 'Missing/invalid name',
-    });
+    const message = 'Missing/invalid name';
+    return res.status(400).send({ message });
   }
 
-  const newTeam = { id: inputId, name: inputName };
-  const teams = readJsonData('teams');
-  const existing = teams.find(t => t.id === req.body.id);
-
-  if (existing) {
-    return res.status(409).send({
-      message: `A team with id "${req.body.id}" already exists`,
-    });
+  try {
+    const newTeam = teamsService.createTeam(inputId, inputName);
+    const data = newTeam;
+    const message = `Created new team "${newTeam.name}"`;
+    res.status(201).send({ data, message });
   }
 
-  teams.push(newTeam);
-  writeJsonData('teams', teams);
-
-  res.status(201).send({
-    message: 'Created new team',
-    data: newTeam,
-  });
+  catch (err) {
+    return res.status(409).send({ message: err.message });
+  }
 }
 
 function deleteTeam(req, res) {
 
-  const teamId = req.params.id;
-  let teams = readJsonData('teams');
-  const index = teams.findIndex(t => t.id === teamId);
+  const inputId = req.params.id;
 
-  if (index === -1) {
-    return res.status(404).send({
-      message: `Cannot find team with id "${teamId}"`,
-    });
+  try {
+    const deletedTeam = teamsService.deleteTeam(inputId);
+    const data = deletedTeam;
+    const message = `Deleted team ${inputId}`;
+    res.send({ data, message });
   }
 
-  teams = teams.filter(t => t.id !== teamId);
-  writeJsonData('teams', teams);
-
-  res.send({
-    message: `Deleted team ${teamId}`,
-  });
+  catch (err) {
+    return res.status(404).send({ message: err.message });
+  }
 }
 
 module.exports = {

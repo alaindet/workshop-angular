@@ -14,6 +14,7 @@ export class UserService {
   private http = inject(HttpClient);
   private storageKey = 'sports_watcher.user';
 
+  // TODO: This does not work well
   signIn(credentials: UserCredentials): Observable<DataResponse<User>> {
     const url = `${environment.apiUrl}/users/signin`;
     return this.http.post<DataResponse<User>>(url, credentials);
