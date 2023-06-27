@@ -1,14 +1,21 @@
 import { Component, signal } from '@angular/core';
-
-import { CounterVanillaComponent } from './components/counter-vanilla.component';
-import { CounterSubjectComponent } from './components/counter-subject.component';
-import { CounterSignalComponent } from './components/counter-signal.component';
-import { CounterExternalSignalComponent } from './components/counter-external-signal.component';
-import { PeopleComponent } from './components/people.component';
-import { ClockVanillaComponent } from './components/clock-vanilla.component';
-import { ClockDestroyRefComponent } from './components/clock-destroyref.component';
-import { ClockTakeUntilDestroyComponent } from './components/clock-takeuntildestroy.component';
 import { NgIf } from '@angular/common';
+
+import {
+  CounterVanillaComponent,
+  CounterSubjectComponent,
+  CounterSignalComponent,
+  CounterExternalSignalComponent,
+} from './components/counters';
+
+import { PeopleComponent } from './components/people.component';
+
+import {
+  ClockVanillaComponent,
+  ClockDestroyRefComponent,
+  ClockTakeUntilDestroyComponent,
+  ClockExternalComponent,
+} from './components/clocks';
 
 const imports = [
   NgIf,
@@ -20,6 +27,7 @@ const imports = [
   ClockVanillaComponent,
   ClockDestroyRefComponent,
   ClockTakeUntilDestroyComponent,
+  ClockExternalComponent,
 ];
 
 @Component({
@@ -28,13 +36,18 @@ const imports = [
   imports,
   host: { class: 'demo-boxes' },
   template: `
+    <h1>Signals 101</h1>
+
+    <h2>Counters</h2>
     <app-counter-vanilla />
     <app-counter-subject />
     <app-counter-signal />
     <app-counter-external-signal />
 
+    <h2>People</h2>
     <app-people />
 
+    <h2>Clocks</h2>
     <!-- Clock vanilla -->
     <button type="button" (click)="onToggleClock('vanilla')">
       {{ clocks()['vanilla'] ? 'Close' : 'Open' }} vanilla clock
@@ -52,6 +65,12 @@ const imports = [
       {{ clocks()['takeuntildestroy'] ? 'Close' : 'Open' }} takeUntilDestroy() clock
     </button>
     <app-clock-takeuntildestroy *ngIf="clocks()['takeuntildestroy']" />
+
+    <!-- Clock external -->
+    <button type="button" (click)="onToggleClock('external')">
+      {{ clocks()['external'] ? 'Close' : 'Open' }} external clock
+    </button>
+    <app-clock-external *ngIf="clocks()['external']" />
   `,
 })
 export class AppComponent {
@@ -60,6 +79,7 @@ export class AppComponent {
     vanilla: false,
     destroyref: false,
     takeuntildestroy: false,
+    external: false,
   });
 
   onToggleClock(clockName: string) {

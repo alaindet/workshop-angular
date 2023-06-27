@@ -19,13 +19,14 @@ const imports = [
 })
 export class ClockDestroyRefComponent implements OnInit {
 
-  private destroy$ = new Subject<void>();
   private destroyRef = inject(DestroyRef);
+  private destroy$ = new Subject<void>();
   private stop$ = new Subject<void>();
 
-  isRunning = signal(false);
+  CLOCK_OFF_VALUE = -42;
+  clock = signal(this.CLOCK_OFF_VALUE);
+  isRunning = computed(() => this.clock() !== this.CLOCK_OFF_VALUE);
   buttonText = computed(() => this.isRunning() ? 'Stop' : 'Start');
-  clock = signal(0);
   elapsed = computed(() => `${(this.clock() ?? 0) + 1} seconds have passed`);
   tickingEffect = effect(() => console.log(`Tic tac: ${this.elapsed()}`));
 
@@ -38,11 +39,10 @@ export class ClockDestroyRefComponent implements OnInit {
   }
 
   onStartStop() {
-    const wasRunning = this.isRunning();
-    this.isRunning.update(isRunning => !isRunning);
 
-    if (wasRunning) {
+    if (this.isRunning()) {
       this.stop$.next();
+      this.clock.set(this.CLOCK_OFF_VALUE);
       return;
     }
 
