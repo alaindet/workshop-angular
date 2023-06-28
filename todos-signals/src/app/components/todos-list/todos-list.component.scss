@@ -1,0 +1,51 @@
+.todos-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid #ccc;
+  padding: 1rem;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #eee;
+  }
+
+  &.--last {
+    border-bottom: 0;
+  }
+
+  &.--done {
+    .todo-item__info {
+      text-decoration: line-through;
+      color: red;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    button {
+      padding: 0.4rem 0.5rem;
+      margin: 0;
+    }
+  }
+
+  &__info {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    gap: 0.5rem;
+    border-radius: 0.5rem;
+    transition: 0.15s background-color ease-in-out;
+  }
+}

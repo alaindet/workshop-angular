@@ -1,0 +1,22 @@
+<form [formGroup]="theForm" (ngSubmit)="onSubmit()">
+
+  <div class="form-control">
+    <label for="item-name">Name</label>
+    <input
+      #nameInputRef
+      type="text"
+      formControlName="name"
+      placeholder="Item name..."
+    >
+  </div>
+
+  <div class="form-control">
+    <button type="submit" [disabled]="theForm.invalid">
+      {{ isEditing() ? 'Edit' : 'Create' }}
+    </button>
+
+    <button *ngIf="isEditing()" type="button" (click)="onDeselect()">
+      Deselect
+    </button>
+  </div>
+</form>

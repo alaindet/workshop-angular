@@ -1,0 +1,46 @@
+<ng-container *ngIf="items.length; else noItemsTemplate">
+  <ul class="todos-list">
+    <li
+      *ngFor="let item of items; let last = last"
+      class="todo-item"
+      [class.--done]="item.isDone"
+      [class.--last]="last && items.length > 1"
+      (click)="onToggleItem(item.id, $event)"
+    >
+      <div class="todo-item__info">
+        {{ item.name }}
+        <ng-icon *ngIf="item.isDone" name="aspectsCheckmark"></ng-icon>
+      </div>
+
+      <div class="todo-item__actions">
+        <button type="button" (click)="onRemoveItem(item.id, $event)">
+          <ng-icon name="aspectsTrash"></ng-icon>
+        </button>
+        <button type="button" (click)="onEditItem(item.id, $event)">
+          <ng-icon name="aspectsEdit"></ng-icon>
+        </button>
+        <button type="button" (click)="onToggleItem(item.id, $event)">
+          <ng-icon [name]="item.isDone ? 'aspectsUndo' : 'aspectsCheckmark'"></ng-icon>
+        </button>
+      </div>
+    </li>
+  </ul>
+</ng-container>
+
+<!-- Dialog: Remove item -->
+<dialog #removeDialogRef [open]="isRemoveDialogOpen()">
+  <header>Remove item</header>
+  <form method="dialog">
+    <p>Do you want to remove the item?</p>
+    <menu>
+      <button value="cancel">Cancel</button>
+      <button value="no">No</button>
+      <button value="yes">Yes</button>
+    </menu>
+  </form>
+</dialog>
+
+<!-- Template: No items template -->
+<ng-template #noItemsTemplate>
+  No items
+</ng-template>
