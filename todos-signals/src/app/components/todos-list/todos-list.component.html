@@ -1,11 +1,13 @@
 <ng-container *ngIf="items.length; else noItemsTemplate">
   <ul class="todos-list">
     <li
-      *ngFor="let item of items"
+      *ngFor="let item of items; let last = last"
       class="todo-item"
       [class.--done]="item.isDone"
+      [class.--last]="last"
     >
       <div class="todo-item__actions">
+        <button type="button" (click)="onRemoveItem(item.id)">Remove</button>
         <button type="button" (click)="onEditItem(item.id)">Edit</button>
         <button type="button" (click)="onToggleItem(item.id)">Toggle</button>
       </div>

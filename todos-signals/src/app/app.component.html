@@ -2,11 +2,14 @@
 <h2>(This time, with Angular Signals!)</h2>
 
 <app-todo-form
-
+  [item]="todosService.selectedItem()"
+  (created)="todosService.createItem($event)"
+  (edited)="todosService.editItem($event.id, $event.name)"
 />
 
 <app-todos-list
   [items]="todosService.items()"
   (toggledItem)="todosService.toggleItem($event)"
   (selectedItem)="todosService.selectItem($event)"
+  (removedItem)="todosService.removeItem($event)"
 />

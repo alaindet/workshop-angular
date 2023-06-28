@@ -11,10 +11,24 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+  border-bottom: 2px solid #ccc;
+  padding: 1rem;
+  padding-bottom: 2rem;
+}
+
+.todo-item.--last {
+  border-bottom: 0;
 }
 
 .todo-item__actions {
-  // ...
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.todo-item__actions button {
+  padding: 0.2rem 0.5rem;
+  margin: 0;
 }
 
 .todo-item__info {
@@ -24,5 +38,5 @@
 
 .todo-item.--done .todo-item__info {
   text-decoration: line-through;
-  color: green;
+  color: red;
 }

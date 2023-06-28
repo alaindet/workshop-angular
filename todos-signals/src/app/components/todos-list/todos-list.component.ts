@@ -22,6 +22,7 @@ export class TodosListComponent {
 
   @Output() toggledItem = new EventEmitter<TodoItem['id']>();
   @Output() selectedItem = new EventEmitter<TodoItem['id']>();
+  @Output() removedItem = new EventEmitter<TodoItem['id']>();
 
   onToggleItem(itemId: TodoItem['id']) {
     this.toggledItem.emit(itemId);
@@ -29,5 +30,9 @@ export class TodosListComponent {
 
   onEditItem(itemId: TodoItem['id']) {
     this.selectedItem.emit(itemId);
+  }
+
+  onRemoveItem(itemId: TodoItem['id']) {
+    this.removedItem.emit(itemId);
   }
 }
