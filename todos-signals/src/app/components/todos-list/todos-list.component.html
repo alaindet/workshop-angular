@@ -1,0 +1,23 @@
+<ng-container *ngIf="items.length; else noItemsTemplate">
+  <ul class="todos-list">
+    <li
+      *ngFor="let item of items"
+      class="todo-item"
+      [class.--done]="item.isDone"
+    >
+      <div class="todo-item__actions">
+        <button type="button" (click)="onEditItem(item.id)">Edit</button>
+        <button type="button" (click)="onToggleItem(item.id)">Toggle</button>
+      </div>
+
+      <div class="todo-item__info">
+        {{ item.name }}
+      </div>
+    </li>
+  </ul>
+</ng-container>
+
+<!-- Template: No items template -->
+<ng-template #noItemsTemplate>
+  No items
+</ng-template>
