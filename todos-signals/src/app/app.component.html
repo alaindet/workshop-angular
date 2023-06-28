@@ -5,6 +5,7 @@
   [item]="todosService.selectedItem()"
   (created)="todosService.createItem($event)"
   (edited)="todosService.editItem($event.id, $event.name)"
+  (deselected)="todosService.clearSelecteItem()"
 />
 
 <app-todos-list

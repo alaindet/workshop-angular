@@ -31,6 +31,7 @@ export class TodosService {
     this.items.update(items => items.map(item => {
       return (item.id === id) ? { ...item, name } : item;
     }));
+    this.clearSelecteItem();
   }
 
   toggleItem(id: TodoItem['id']) {

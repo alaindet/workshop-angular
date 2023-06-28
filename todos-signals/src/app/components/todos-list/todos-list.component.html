@@ -5,15 +5,23 @@
       class="todo-item"
       [class.--done]="item.isDone"
       [class.--last]="last"
+      (click)="onToggleItem(item.id, $event)"
     >
-      <div class="todo-item__actions">
-        <button type="button" (click)="onRemoveItem(item.id)">Remove</button>
-        <button type="button" (click)="onEditItem(item.id)">Edit</button>
-        <button type="button" (click)="onToggleItem(item.id)">Toggle</button>
-      </div>
-
       <div class="todo-item__info">
         {{ item.name }}
+        <ng-icon *ngIf="item.isDone" name="aspectsCheckmark"></ng-icon>
+      </div>
+
+      <div class="todo-item__actions">
+        <button type="button" (click)="onRemoveItem(item.id, $event)">
+          <ng-icon name="aspectsTrash"></ng-icon>
+        </button>
+        <button type="button" (click)="onEditItem(item.id, $event)">
+          <ng-icon name="aspectsEdit"></ng-icon>
+        </button>
+        <button type="button" (click)="onToggleItem(item.id, $event)">
+          <ng-icon [name]="item.isDone ? 'aspectsUndo' : 'aspectsCheckmark'"></ng-icon>
+        </button>
       </div>
     </li>
   </ul>
