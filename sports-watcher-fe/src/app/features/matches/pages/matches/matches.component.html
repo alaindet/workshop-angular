@@ -1,0 +1,168 @@
+<h1 class="mb-4">Matches</h1>
+
+<div *ngIf="isAdmin()" class="card mb-4 bg-light">
+  <div class="card-body">
+    <h2>Create a new match</h2>
+    <div class="container-fluid gx-0">
+      <form
+        class="row g-3 align-items-end"
+        *ngIf="matchForm"
+        [formGroup]="matchForm"
+        (ngSubmit)="onCreateMatch()"
+      >
+
+        <!-- Home team -->
+        <div class="col-3">
+          <label for="matchhome">Home Team</label>
+          <select
+            id="matchhome"
+            formControlName="home"
+            class="form-control"
+          >
+            <option value="">Select team...</option>
+            <option *ngFor="let team of homeTeamOptions()" [value]="team.id">
+              {{ team.name }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Away team -->
+        <div class="col-3">
+          <label for="matchaway">Away Team</label>
+          <select
+            id="matchaway"
+            formControlName="away"
+            class="form-control"
+          >
+            <option value="">Select team...</option>
+            <option *ngFor="let team of awayTeamOptions()" [value]="team.id">
+              {{ team.name }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Winner team -->
+        <div class="col-3">
+          <label for="matchwinner">Winner Team</label>
+          <select
+            id="matchwinner"
+            formControlName="winner"
+            class="form-control"
+          >
+            <option value="">Select team...</option>
+            <option *ngFor="let option of winnerTeamOptions" [value]="option.value">
+              {{ option.label }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Submit -->
+        <div class="col-3">
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="matchForm.invalid"
+          >
+            Create match
+          </button>
+        </div>
+
+      </form>
+    </div>
+    <p *ngIf="matchForm.hasError('sameTeam')">
+      {{ matchForm.errors!['sameTeam'] }}
+    </p>
+  </div>
+</div>
+
+<ng-container *ngIf="loaded(); else loadingRef">
+  <div class="accordion">
+    <div
+      *ngFor="let teamMatches of matchesGroupedByTeam()"
+      class="accordion-item"
+    >
+      <h2 class="accordion-header" [id]="teamMatches.team.id + '-header'">
+        <button
+          class="accordion-button"
+          [class.collapsed]="openAccordion() !== teamMatches.team.id"
+          type="button"
+          (click)="onToggleOpenAccordion(teamMatches.team.id)"
+          [attr.aria-expanded]="openAccordion() === teamMatches.team.id"
+          [attr.aria-controls]="teamMatches.team.id"
+        >
+          {{ teamMatches.team.name }}
+          ({{ teamMatches.matches.length }})
+        </button>
+      </h2>
+
+      <div
+        id="collapseTwo"
+        class="accordion-collapse collapse show"
+        [class.show]="openAccordion() === teamMatches.team.id"
+        [attr.aria-labelledby]="teamMatches.team.id + '-header'"
+      >
+        <div class="accordion-body">
+          <ul>
+            <li *ngFor="let match of teamMatches.matches">
+
+              <!-- Result badge -->
+              <ng-container
+                [ngTemplateOutlet]="resultBadgeRef"
+                [ngTemplateOutletContext]="{
+                  $implicit: match | appResultBadge:teamMatches.team
+                }"
+              />
+
+              &nbsp;
+
+              <!-- Home team -->
+              <ng-container
+                [ngTemplateOutlet]="match.home === teamMatches.team.id
+                  ? highlightedTeamNameRef
+                  : normalTeamNameRef"
+                [ngTemplateOutletContext]="{ $implicit: match.home }"
+              />
+
+              vs.
+
+              <!-- Away team -->
+              <ng-container
+                [ngTemplateOutlet]="match.away === teamMatches.team.id
+                  ? highlightedTeamNameRef
+                  : normalTeamNameRef"
+                [ngTemplateOutletContext]="{ $implicit: match.away }"
+              />
+
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<!-- Template: loading -->
+<ng-template #loadingRef>
+  Loading...
+</ng-template>
+
+<!-- Template: Result badge -->
+<ng-template #resultBadgeRef let-result>
+  <span [ngClass]="['badge', result.cssClass]">
+    {{ result.label }}
+  </span>
+</ng-template>
+
+<!-- Template: Highlighted team name -->
+<ng-template #highlightedTeamNameRef let-team>
+  <strong>
+    {{ teamsMap()![team].name }}
+  </strong>
+</ng-template>
+
+<!-- Template: Normal team name -->
+<ng-template #normalTeamNameRef let-team>
+  <span>
+    {{ teamsMap()![team].name }}
+  </span>
+</ng-template>

@@ -1,0 +1,16 @@
+{
+    "client": "Thunder Client",
+    "environmentName": "sports-watcher",
+    "dateExported": "2023-06-28T14:44:02.848Z",
+    "version": "1.0",
+    "variables": [
+        {
+            "name": "sw_baseurl",
+            "value": "http://localhost:3000"
+        },
+        {
+            "name": "sw_token",
+            "value": ""
+        }
+    ]
+}

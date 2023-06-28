@@ -1,0 +1,116 @@
+<h1 class="mb-3">Team: {{ team().name }}</h1>
+
+<nav aria-label="breadcrumb" class="mb-4">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a routerLink="/teams">&larr; Teams</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ team().name }}</li>
+  </ol>
+</nav>
+
+<button
+  *ngIf="isAdmin()"
+  type="button"
+  class="btn btn-danger mb-3"
+  data-bs-toggle="modal"
+  data-bs-target="#removeTeamModal"
+>
+  Remove team
+</button>
+
+<ng-container *ngIf="loaded(); else loadingRef">
+  <ul class="list-group">
+
+    <!-- Name -->
+    <li class="list-group-item">
+      <strong>Name: </strong>
+      {{ team()!.name }}
+    </li>
+
+    <ng-container *ngIf="ranking() as ranking">
+
+      <!-- Ranking -->
+      <li class="list-group-item">
+        <strong>Ranking:</strong>
+        {{ ranking.ranking }}
+      </li>
+
+      <!-- Score -->
+      <li class="list-group-item">
+        <strong>Score:</strong>
+        {{ ranking.score }}
+      </li>
+
+    </ng-container>
+
+    <!-- Wins -->
+    <li class="list-group-item">
+      <strong>Wins:</strong>
+      {{ matchesReport().wins }}
+      ({{ matchesReport().winsPercentage }}%)
+    </li>
+
+    <!-- Draws -->
+    <li class="list-group-item">
+      <strong>Draws:</strong>
+      {{ matchesReport().draws }}
+      ({{ matchesReport().drawsPercentage }}%)
+    </li>
+
+    <!-- Losses -->
+    <li class="list-group-item">
+      <strong>Losses:</strong>
+      {{ matchesReport().losses }}
+      ({{ matchesReport().lossesPercentage }}%)
+    </li>
+
+    <!-- Total matches -->
+    <li class="list-group-item">
+      <strong>Total matches:</strong>
+      {{ matchesReport().total }}
+    </li>
+  </ul>
+</ng-container>
+
+<!-- Template: loading -->
+<ng-template #loadingRef>
+  Loading...
+</ng-template>
+
+<div
+  class="modal fade"
+  id="removeTeamModal"
+  tabindex="-1"
+  aria-labelledby="removeTeamModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <h1 class="modal-title fs-5" id="removeTeamModalLabel">
+          Remove team
+        </h1>
+
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+
+      <div class="modal-body">
+        <p>Do you want to remove the team <strong>{{ team().name }}</strong>?</p>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="onRemoveTeam()">
+          Remove team
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

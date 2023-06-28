@@ -1,0 +1,32 @@
+@keyframes linearSpinnerAnimation {
+  from { transform: translateX(-100%) }
+  to { transform: translateX(200%) }
+}
+
+.app-linear-spinner {
+  height: 4px;
+  width: 100%;
+  display: block;
+  overflow: hidden;
+  z-index: 2;
+
+  background-color: var(--bs-primary, #0d6efd);
+
+  &.-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+
+  ._bar {
+    height: 100%;
+    width: 50%;
+    animation-duration: 2s;
+    animation-name: linearSpinnerAnimation;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+    background-color: var(--bs-primary-bg-subtle, #cfe2ff);
+  }
+}

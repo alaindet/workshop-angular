@@ -1,0 +1,173 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "sports-watcher",
+    "dateExported": "2023-06-28T14:56:52.648Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "16bb776a-7519-4eba-b334-2ef42b5bda3b",
+            "colId": "d6b9e72a-578c-4e2a-9623-0379935388e1",
+            "containerId": "",
+            "name": "[Teams] Get all teams",
+            "url": "{{sports_watcher_baseurl}}/teams",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2023-06-28T14:44:51.618Z",
+            "modified": "2023-06-28T14:46:28.116Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{sports_watcher_token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "1cf74b6c-caab-4118-84ac-2a12768e5d12",
+            "colId": "d6b9e72a-578c-4e2a-9623-0379935388e1",
+            "containerId": "",
+            "name": "[Teams] Create new team",
+            "url": "{{sports_watcher_baseurl}}/teams",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2023-06-28T14:49:40.020Z",
+            "modified": "2023-06-28T14:50:44.268Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"id\": \"tea-team\",\n  \"name\": \"Tea Team\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{sports_watcher_token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "ddb55b09-e609-481f-9baf-b03a0bb11bda",
+            "colId": "d6b9e72a-578c-4e2a-9623-0379935388e1",
+            "containerId": "",
+            "name": "[Teams] Create new team Copy",
+            "url": "{{sports_watcher_baseurl}}/teams/tea-team",
+            "method": "DELETE",
+            "sortNum": 30000,
+            "created": "2023-06-28T14:51:18.228Z",
+            "modified": "2023-06-28T14:51:30.340Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{sports_watcher_token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "58c48731-d5be-4337-9de3-bfa750d27fe9",
+            "colId": "d6b9e72a-578c-4e2a-9623-0379935388e1",
+            "containerId": "",
+            "name": "[Matches] Get all matches",
+            "url": "{{sports_watcher_baseurl}}/matches",
+            "method": "GET",
+            "sortNum": 40000,
+            "created": "2023-06-28T14:51:37.642Z",
+            "modified": "2023-06-28T14:51:51.168Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{sports_watcher_token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "156966d0-dd83-4067-82e2-194cb34a1665",
+            "colId": "d6b9e72a-578c-4e2a-9623-0379935388e1",
+            "containerId": "",
+            "name": "[Matches] Create new match",
+            "url": "{{sports_watcher_baseurl}}/matches",
+            "method": "POST",
+            "sortNum": 50000,
+            "created": "2023-06-28T14:51:58.224Z",
+            "modified": "2023-06-28T14:52:46.493Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"home\": \"worried-warriors\",\n  \"away\": \"ginger-pidgeons\",\n  \"winner\": \"ginger-pidgeons\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{sports_watcher_token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "0927a887-93a6-4fef-bf1c-9db6d03cd9c7",
+            "colId": "d6b9e72a-578c-4e2a-9623-0379935388e1",
+            "containerId": "",
+            "name": "[Matches] Delete match",
+            "url": "{{sports_watcher_baseurl}}/matches/922792092780.2141",
+            "method": "DELETE",
+            "sortNum": 60000,
+            "created": "2023-06-28T14:53:22.100Z",
+            "modified": "2023-06-28T14:54:55.894Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{sports_watcher_token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "44940737-f8a8-4380-858f-bd5a2e83f3a5",
+            "colId": "d6b9e72a-578c-4e2a-9623-0379935388e1",
+            "containerId": "",
+            "name": "[Users] Sign in as basic user",
+            "url": "{{sports_watcher_baseurl}}/users/signin",
+            "method": "POST",
+            "sortNum": 70000,
+            "created": "2023-06-28T14:55:05.370Z",
+            "modified": "2023-06-28T14:55:56.765Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\": \"basic@example.com\",\n  \"password\": \"basic@example.com\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{sports_watcher_token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "94d6d7a3-e3c2-483c-abef-9721fe5ae926",
+            "colId": "d6b9e72a-578c-4e2a-9623-0379935388e1",
+            "containerId": "",
+            "name": "[Users] Sign in as admin user",
+            "url": "{{sports_watcher_baseurl}}/users/signin",
+            "method": "POST",
+            "sortNum": 75000,
+            "created": "2023-06-28T14:56:01.586Z",
+            "modified": "2023-06-28T14:56:17.617Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\": \"admin@example.com\",\n  \"password\": \"admin@example.com\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{sports_watcher_token}}"
+            },
+            "tests": []
+        }
+    ]
+}

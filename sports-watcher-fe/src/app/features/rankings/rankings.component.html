@@ -1,0 +1,30 @@
+<h1 class="mb-4">Rankings</h1>
+
+<ng-container *ngIf="loaded(); else loadingRef">
+  <ol class="list-group list-group-numbered">
+    <li
+      *ngFor="let ranking of rankings()"
+      class="list-group-item"
+    >
+      <span
+        class="badge"
+        [class.bg-success]="ranking.ranking <= 3"
+        [class.bg-secondary]="ranking.ranking > 3"
+      >
+        {{ ranking.score }}
+      </span>
+
+      {{ ranking.team.name }}
+      (
+        <strong>{{ ranking.report.winsPercentage }}%</strong> /
+        {{ ranking.report.drawsPercentage }}% /
+        {{ ranking.report.lossesPercentage }}%
+      )
+    </li>
+  </ol>
+</ng-container>
+
+<!-- Template: loading -->
+<ng-template #loadingRef>
+  Loading...
+</ng-template>
