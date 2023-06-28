@@ -25,6 +25,7 @@
   &.--done {
     .todo-item__info {
       text-decoration: line-through;
+      color: red;
     }
   }
 

@@ -11,7 +11,7 @@ export class UiService {
   addNotification(notif: string) {
     if (this.#timer) clearTimeout(this.#timer);
     this.notification.set(notif);
-    this.#timer = setTimeout(this.clearNotification, 3000);
+    this.#timer = setTimeout(() => this.clearNotification(), 3000);
   }
 
   clearNotification() {

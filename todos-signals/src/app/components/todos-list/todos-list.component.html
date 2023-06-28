@@ -4,7 +4,7 @@
       *ngFor="let item of items; let last = last"
       class="todo-item"
       [class.--done]="item.isDone"
-      [class.--last]="last"
+      [class.--last]="last && items.length > 1"
       (click)="onToggleItem(item.id, $event)"
     >
       <div class="todo-item__info">

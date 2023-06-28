@@ -14,3 +14,10 @@
   (selectedItem)="todosService.selectItem($event)"
   (removedItem)="todosService.removeItem($event)"
 />
+
+<div *ngIf="uiService.notification() as notif" class="notification">
+  {{ notif }}
+  <button type="button" (click)="uiService.clearNotification()">
+    <ng-icon name="aspectsClose"></ng-icon>
+  </button>
+</div>
