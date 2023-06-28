@@ -27,6 +27,19 @@
   </ul>
 </ng-container>
 
+<!-- Dialog: Remove item -->
+<dialog #removeDialogRef [open]="isRemoveDialogOpen()">
+  <header>Remove item</header>
+  <form method="dialog">
+    <p>Do you want to remove the item?</p>
+    <menu>
+      <button value="cancel">Cancel</button>
+      <button value="no">No</button>
+      <button value="yes">Yes</button>
+    </menu>
+  </form>
+</dialog>
+
 <!-- Template: No items template -->
 <ng-template #noItemsTemplate>
   No items
