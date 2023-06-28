@@ -1,13 +1,15 @@
 {
   "name": "sports-watcher-be",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.1.0",
+  "description": "Sports Watcher API",
   "main": "app/server.js",
   "scripts": {
-    "start": "nodemon ./app/server.js",
+    "build": "tsc",
+    "start:prod": "node ./dist/app.js",
+    "start": "nodemon",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "generate:matches": "node ./scripts/matches-generator.js",
-    "generate:secret": "node ./scripts/secret-generator.js"
+    "generate:matches": "ts-node ./src/scripts/matches-generator.ts",
+    "generate:secret": "ts-node ./src/scripts/secret-generator.ts"
   },
   "keywords": [
     "node",
@@ -26,6 +28,13 @@
     "winston": "^3.9.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.22"
+    "@types/cors": "^2.8.13",
+    "@types/express": "^4.17.17",
+    "@types/jsonwebtoken": "^9.0.2",
+    "@types/morgan": "^1.9.4",
+    "@types/node": "^20.3.2",
+    "nodemon": "^2.0.22",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.5"
   }
 }

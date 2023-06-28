@@ -6,8 +6,7 @@ export function sameTeamValidator(formGroup: AbstractControl): ValidationErrors 
   const home = controls.get('home')!.value;
   const away = controls.get('away')!.value;
 
-
-  if (home === away) {
+  if (!!home && !!away && home === away) {
     return {
       sameTeam: 'Home and away team cannot be the same!',
     }
