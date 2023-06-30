@@ -41,10 +41,10 @@ export class ClockExternalComponent {
 
 function createClock() {
 
-  const CLOCK_OFF_VALUE = -42;
+  const CLOCK_OFF = -42;
   const stop$ = new Subject<void>();
-  const clock = signal(CLOCK_OFF_VALUE);
-  const isRunning = computed(() => clock() !== CLOCK_OFF_VALUE);
+  const clock = signal(CLOCK_OFF);
+  const isRunning = computed(() => clock() !== CLOCK_OFF);
   const buttonText = computed(() => isRunning() ? 'Stop' : 'Start');
   const elapsed = computed(() => `${clock() + 1} seconds have passed`);
 
@@ -58,7 +58,7 @@ function createClock() {
 
     if (isRunning()) {
       stop$.next();
-      clock.set(CLOCK_OFF_VALUE);
+      clock.set(CLOCK_OFF);
       return;
     }
 

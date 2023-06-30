@@ -26,9 +26,9 @@ export class ClockTakeUntilDestroyComponent  {
   private stop$ = new Subject<void>();
   private injector = inject(EnvironmentInjector); // <-- Not great
 
-  CLOCK_OFF_VALUE = -42;
-  clock = signal(this.CLOCK_OFF_VALUE);
-  isRunning = computed(() => this.clock() !== this.CLOCK_OFF_VALUE);
+  CLOCK_OFF = -42;
+  clock = signal(this.CLOCK_OFF);
+  isRunning = computed(() => this.clock() !== this.CLOCK_OFF);
   buttonText = computed(() => this.isRunning() ? 'Stop' : 'Start');
   elapsed = computed(() => `${(this.clock() ?? 0) + 1} seconds have passed`);
   tickingEffect = effect(() => console.log(`Tic tac: ${this.elapsed()}`));
@@ -40,7 +40,7 @@ export class ClockTakeUntilDestroyComponent  {
 
     if (this.isRunning()) {
       this.stop$.next();
-      this.clock.set(this.CLOCK_OFF_VALUE);
+      this.clock.set(this.CLOCK_OFF);
       return;
     }
 
